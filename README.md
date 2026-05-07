@@ -3,12 +3,6 @@ This is the repository for my hobby project where im building an analytics engin
 
 working in main until the basic scaffolding is setup and im actually working on features
 
-# energy_market_analytics (ema)
-
-A hobby project for building an analytics engine for energy markets.
-
-Currently working in `main` until the basic scaffolding is in place.
-
 ## Current scope
 
 The current pipeline syncs DK1 day-ahead electricity prices into a local DuckDB database.
