@@ -1,0 +1,14 @@
+[database]
+path = "data/warehouse/ema.duckdb"
+
+[day_ahead_prices]
+start_date_dk = "2026-05-05"
+price_area = "DK1"
+interval_minutes = 15
+timezone = "Europe/Copenhagen"
+
+[energi_data_service]
+base_url = "https://api.energidataservice.dk/dataset"
+dataset = "DayAheadPrices"
+provider = "energidataservice"
+timeout_seconds = 30
