@@ -20,4 +20,4 @@ sync-prices = "ema.cli.sync_prices:main"
 
 [tool.black]
 line-length = 88
-target-version = ["py313"]
+target-version = ["py311", "py312", "py313"]
