@@ -77,31 +77,4 @@ provider = "energidataservice"
 timeout_seconds = 30
 ```
 
-## Generated files
 
-The DuckDB file is created at the path defined in `ema.toml`.
-
-Generated files such as `*.egg-info/`, virtual environments, and local database files should not be committed.
-
-Recommended `.gitignore` entries:
-
-```gitignore
-*.egg-info/
-build/
-dist/
-__pycache__/
-*.pyc
-
-ema_env/
-.venv/
-
-data/warehouse/*.duckdb
-```
-
-## Known limitation
-
-The current missing-data logic finds the first and last missing timestamp, then fetches everything between them.
-
-If valid data already exists between those two points, that data may be fetched again and reprocessed. The fact table should not create duplicate rows because it is keyed by timestamp and price area, but the API request can be larger than necessary.
-
-This will be fixed by grouping missing timestamps into contiguous missing blocks.
