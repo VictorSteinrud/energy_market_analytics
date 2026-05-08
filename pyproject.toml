@@ -17,3 +17,7 @@ where = ["src"]
 
 [project.scripts]
 sync-prices = "ema.cli.sync_prices:main"
+
+[tool.black]
+line-length = 88
+target-version = ["py313"]
