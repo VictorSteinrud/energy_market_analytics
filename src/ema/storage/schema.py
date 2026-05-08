@@ -21,8 +21,7 @@ def create_schema(db_path: Path) -> None:
     ensure_database_directory(db_path)
 
     with duckdb.connect(str(db_path)) as con:
-        con.execute(
-            """
+        con.execute("""
             CREATE TABLE IF NOT EXISTS fact_day_ahead_prices (
                 time_utc TIMESTAMP NOT NULL,
                 time_dk TIMESTAMP NOT NULL,
@@ -59,11 +58,9 @@ def create_schema(db_path: Path) -> None:
                     )
                 )
             );
-            """
-        )
+            """)
 
-        con.execute(
-            """
+        con.execute("""
             CREATE TABLE IF NOT EXISTS data_quality_day_ahead_prices (
                 run_id VARCHAR NOT NULL,
 
@@ -94,11 +91,9 @@ def create_schema(db_path: Path) -> None:
                 CHECK (missing_rows >= 0),
                 CHECK (status IN ('ok', 'missing_data', 'error'))
             );
-            """
-        )
+            """)
 
-        con.execute(
-            """
+        con.execute("""
             CREATE TABLE IF NOT EXISTS ingestion_runs (
                 run_id VARCHAR NOT NULL,
 
@@ -123,22 +118,17 @@ def create_schema(db_path: Path) -> None:
                 CHECK (price_area IN ('DK1', 'DK2')),
                 CHECK (status IN ('running', 'completed', 'completed_with_missing_data', 'error'))
             );
-            """
-        )
+            """)
 
-        con.execute(
-            """
+        con.execute("""
             CREATE INDEX IF NOT EXISTS idx_day_ahead_prices_time_dk
             ON fact_day_ahead_prices (time_dk);
-            """
-        )
+            """)
 
-        con.execute(
-            """
+        con.execute("""
             CREATE INDEX IF NOT EXISTS idx_day_ahead_prices_date_area
             ON fact_day_ahead_prices (date_dk, price_area);
-            """
-        )
+            """)
 
 
 def print_schema_summary(db_path: Path) -> None:

@@ -7,7 +7,6 @@ from typing import Any
 import pandas as pd
 import requests
 
-
 OUTPUT_COLUMNS = [
     "time_utc",
     "time_dk",
@@ -46,7 +45,7 @@ def fetch_day_ahead_prices(
 ) -> pd.DataFrame:
     if not price_area:
         raise ValueError("price_area must not be empty")
-    
+
     if not base_url:
         raise ValueError("base_url must not be empty")
 

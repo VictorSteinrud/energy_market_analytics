@@ -65,8 +65,7 @@ def _insert_expected_placeholders(
 
     con.register("expected_intervals_df", expected_df)
 
-    result = con.execute(
-        """
+    result = con.execute("""
         INSERT INTO fact_day_ahead_prices (
             time_utc,
             time_dk,
@@ -103,8 +102,7 @@ def _insert_expected_placeholders(
             WHERE f.time_utc = e.time_utc
               AND f.price_area = e.price_area
         );
-        """
-    ).fetchone()
+        """).fetchone()
 
     con.unregister("expected_intervals_df")
 
@@ -154,8 +152,7 @@ def _update_observed_prices(
 
     con.register("observed_prices_df", observed_df)
 
-    result = con.execute(
-        """
+    result = con.execute("""
         UPDATE fact_day_ahead_prices AS f
         SET
             day_ahead_price_eur = o.day_ahead_price_eur,
@@ -168,8 +165,7 @@ def _update_observed_prices(
         FROM observed_prices_df AS o
         WHERE f.time_utc = o.time_utc
           AND f.price_area = o.price_area;
-        """
-    ).fetchone()
+        """).fetchone()
 
     con.unregister("observed_prices_df")
 
@@ -464,7 +460,9 @@ def sync_day_ahead_prices(
             )
 
             ingestion_status = (
-                "completed" if result.missing_rows == 0 else "completed_with_missing_data"
+                "completed"
+                if result.missing_rows == 0
+                else "completed_with_missing_data"
             )
 
             _write_ingestion_run_end(

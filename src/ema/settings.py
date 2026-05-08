@@ -66,7 +66,9 @@ def _require_int(section: dict, key: str, section_name: str) -> int:
     value = section.get(key)
 
     if not isinstance(value, int):
-        raise KeyError(f"Missing or invalid integer config value: [{section_name}].{key}")
+        raise KeyError(
+            f"Missing or invalid integer config value: [{section_name}].{key}"
+        )
 
     return value
 
@@ -148,7 +150,7 @@ def load_config(config_path: Path) -> AppConfig:
 
     if interval_minutes <= 0:
         raise ValueError("interval_minutes must be positive.")
-    
+
     if interval_minutes != 15:
         raise ValueError("interval_minutes must be 15 for DayAheadPrices.")
 
