@@ -127,7 +127,10 @@ def _get_missing_range(
             COUNT(*) AS missing_rows
         FROM fact_day_ahead_prices
         WHERE price_area = ?
-          AND day_ahead_price_eur IS NULL;
+        AND (
+            day_ahead_price_eur IS NULL
+            OR day_ahead_price_dkk IS NULL
+        )
         """,
         [price_area],
     ).fetchone()
